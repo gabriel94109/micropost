@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <%= display_meta_tags :site => 'Micropost' %>
+      <%= render 'layouts/stylesheets' %>
+      <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div class='container'>
+      <%= render 'layouts/header' %>
+      <section class="round">
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{name}" %>
+        <% end %>
+        <%= render_crumbs %>
+        <%= yield %>
+      </section>
+      <%= render 'layouts/footer' %>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+    <%= render :partial => 'layouts/feedback' %>
+  </body>
+</html>
+

@@ -1,0 +1,43 @@
+<% content_for :head do -%>
+   <%= auto_discovery_link_tag %>
+<% end -%>
+<table class="profile" summary="Profile information">
+  <tr>
+    <td class="main">
+
+      <% form_tag user_path(@user), :method => 'get' do -%>
+        <p>
+          <% ['created_at', 'vote_score', 'replies'].each do |sort| %>
+            <%= radio_button_tag 'sort', sort, @sort == sort %>
+            <%= sort.humanize %>
+          <% end -%>
+          <%= submit_tag 'Sort' %>
+        </p>
+      <% end -%>
+
+      <%= render 'shared/microposts' %>
+
+    </td>
+    <td class="sidebar round">
+      <h1>
+        <%= image_tag(@user.image, :alt => "Profile Pic", :class => 'avatar') %>
+        <%= @user.name %>
+      </h1>
+      <strong>Name</strong>
+      <%= @user.birthname %><br />
+      <strong>Microposts</strong>  
+      <%= @user.microposts_count %><br />
+      <strong>Microblogs</strong>  
+      <%= @user.microblogs_count %><br />
+      <strong>Location</strong>  
+      <%= @user.location %><br />
+      <strong>Website</strong>  
+      <%= link_to @user.website %><br />
+      <strong>Bio</strong>  
+      <%= @user.bio %><br />
+      <%= link_to 'RSS Feed', params.merge(:format => :rss), :class => "rss_button round" %>
+    </td>
+  </tr>
+</table>
+
+

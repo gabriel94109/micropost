@@ -1,0 +1,7 @@
+<table class='hashtags'>
+  <tr><td>
+      <% @hashtags.each do |tag| %>
+        <%= link_to tag, microblogs_path(:search => tag.name) %><br />
+      <% end -%>
+  </td></tr>
+</table>

@@ -1,0 +1,5 @@
+<%= will_paginate @users %>
+<table class="microposts" summary="User profiles">
+  <%= render(:partial => 'shared/user', :collection => @users) %>
+</table>
+<%= will_paginate @users %>

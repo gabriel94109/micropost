@@ -1,0 +1,10 @@
+<%= form_for @reply, :url => reply_comment_path  do |f| -%>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class='field'>
+    <%= f.text_area :body, :onkeyup => 'comment_limit()' %><br/>
+    <%= f.label '140', :id => 'limit' %> characters remaining
+  </div>
+  <div class='actions'>
+    <%= f.submit "Submit" %>
+  </div>
+<% end -%>

@@ -1,0 +1,25 @@
+<% content_for :head do -%>
+  <%= stylesheet_link_tag 'wmd' %>
+  <%= javascript_include_tag 'wmd' %>
+  <%= javascript_include_tag 'showdown' %>
+<% end -%>
+
+<%= form_for @microblog do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title, :style => 'width: 480px;' %>should count down from 60, also adjust field width<br />
+    <%= f.label :keywords %><br />
+    <%= f.text_field :keywords, :style => 'width: 240px;'  %>30, want autocompleting
+    <div id='wmd-container'>
+      <%= f.label :markdown %><br />
+      <div id='wmd-button-bar'></div>
+      <%= f.text_area :markdown, :id => 'wmd-input'%><br/ >
+    </div>
+    <%= f.submit %>
+  </p>
+<% end %>
+<h3>Preview</h3>
+<div id='wmd-preview'></div>
+
+

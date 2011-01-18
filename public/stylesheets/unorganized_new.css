@@ -1,0 +1,17 @@
+/* layouts/application */
+.container {
+  width: 960px;
+}
+
+body {
+  background: #cff;
+}
+
+/* help page */
+.youtube_small_right {
+  float: right;
+}
+
+.indented {
+  margin-left: 100px;
+}

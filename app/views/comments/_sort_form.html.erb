@@ -1,0 +1,10 @@
+<% form_tag comments_path, :method => 'get' do -%>
+  <p>
+    <% ['created_at', 'vote_score', 'replies'].each do |sort| %>
+      <%= radio_button_tag 'sort', sort, @sort == sort, :class => 'sort_button round' %>
+      <%= label_tag 'sort'+'_'+sort, sort.humanize %>
+    <% end -%>
+    <%= hidden_field_tag :search, params[:search] %>
+    <%= submit_tag 'Sort' %>
+  </p>
+<% end -%>

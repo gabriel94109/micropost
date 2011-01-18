@@ -1,0 +1,8 @@
+this is not searching tags yet
+<table class='hashtags'>
+  <tr><td>
+      <% @hashtags.each do |tag| %>
+        <%= link_to tag, users_path(:search => tag.name) %><br />
+      <% end -%>
+  </td></tr>
+</table>

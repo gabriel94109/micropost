@@ -1,0 +1,29 @@
+<table class="users" summary="Index of Users">
+  <tr>
+    <td class="leftbar round">
+      <h1><%= title 'Search Users by Name' %></h1>
+
+      <% form_tag users_path, :method => 'get' do -%>
+        <p>
+          <%= text_field_tag :search_name, params[:search_name] %>
+          <%= submit_tag 'Search', :name => nil %>
+        </p>
+      <% end -%>
+
+      <%= will_paginate %>
+      <%= render 'shared/users' %>
+      <%= will_paginate %>
+    </td>
+
+    <td class="centerbar round">
+
+    </td>
+    <td class="sidebar round">
+      <p><%= link_to 'Invite Your Friends', '/about' , :class => 'signup_button round' %></p>
+      <h3>Most Active Users</h3>
+      <%= will_paginate %>
+      <%= render :partial => 'shared/users', :collection => @active_users %>
+      <%= will_paginate %>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,49 @@
+.votecell{
+  width: 60px;
+  vertical-align: top;
+}
+
+.vote{
+  text-align:center;
+}
+
+.vote-count-post{
+  display:block;
+  color:#808185;
+  font-weight:bold;
+  font-size:240%;
+  line-height: 1;
+}
+
+.vote-up-off,.vote-up-on,.vote-down-off,.vote-down-on{
+  background-image:url(/images/sprites.png);
+  background-repeat:no-repeat;
+  background-position:0 -265px;
+  overflow:hidden;
+  display:block;
+  margin:0 auto;
+  width:41px;
+  height:25px;
+}
+
+.vote-up-off,.vote-down-off{
+  cursor:pointer;
+}
+
+.vote-up-off,.vote-up-on,.vote-down-off,.vote-down-on{
+  text-indent:-9999em;
+  font-size:1px;
+}
+
+.vote-up-on{
+  background-position:0 -230px;
+}
+
+.vote-down-off{
+  background-position:0 -300px;
+}
+
+.vote-down-on{
+  background-position:
+  0 -330px;
+}

@@ -1,0 +1,15 @@
+<% content_for :head do -%>
+   <%= auto_discovery_link_tag %>
+<% end -%>
+
+<%= raw @microblog.content %>
+
+<p>
+  <%= link_to "New Microblog", new_microblog_path %> 
+  <% if current_user?(@microblog.user)  -%>
+    | <%= link_to "Edit Microblog", edit_microblog_path(@microblog) %> 
+  <% end -%>
+</p>
+
+<h2>Vote now!</h2>
+<%= render :partial => 'shared/microposts', :object => @microposts %>

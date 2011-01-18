@@ -1,0 +1,30 @@
+<% content_for :head do -%>
+   <%= auto_discovery_link_tag %>
+<% end -%>
+<table class="microposts" summary="Index of Microposts">
+  <tr>
+    <td class="main">
+      <% if signed_in? -%>
+        <h1 class='micropost'>What's up?</h1>
+        <%= render 'shared/micropost_form' %>
+      <% end -%>
+      <%= render 'search_form' %>
+      <%= render 'sort_form' %>
+      <%= render 'shared/microposts' %>
+    </td>
+
+    <td class="sidebar round">
+      <% unless signed_in? -%>
+        <p><%= link_to 'Sign in now with Twitter!', '/auth/twitter', :class => 'signup_button round' %></p>
+      <% end -%>
+      <p><%= link_to 'RSS Feed', params.merge(:format => :rss), :class => 'rss_button round' %></p>
+
+      <h3>Top #Hashtags</h3>
+      <%= render 'hashtags' %>
+
+      <h3>Most Active Users</h3>
+      <%= render 'shared/users' %>
+
+    </td>
+  </tr>
+</table>

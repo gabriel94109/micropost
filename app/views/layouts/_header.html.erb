@@ -1,0 +1,24 @@
+<header>
+<% logo = image_tag("Micropost.png", :alt => "Micropost", :class => "round") -%>
+<%= link_to logo, root_path %>
+  <nav class="round">
+  <ul>
+    <li><%= link_to 'Micropost', comments_path %></li>
+    <li><%= link_to 'Microblog', microblogs_path %></li>
+    <li><%= link_to 'News', comments_path %></li>
+    <li><%= link_to 'Photos', comments_path %></li>
+    <li><%= link_to 'Videos', comments_path %></li>
+    <li><%= link_to 'Classifieds', comments_path %></li>
+    <li><%= link_to 'Users', users_path %></li>
+    <% if current_user -%>
+      <li><%= link_to 'Profile', "/#{current_user.name}" %></li>
+      <li><%= link_to 'Settings', edit_user_path(current_user) %></li>
+    <% end -%>
+    <% if current_user %>  
+      <li><%= link_to "Sign Out", signout_path %></li>
+    <% else %>  
+      <li><%= link_to "Sign in with Twitter", "/auth/twitter" %></li>
+    <% end %> 
+  </ul>
+  </nav>
+</header>

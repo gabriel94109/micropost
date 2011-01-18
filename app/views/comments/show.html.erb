@@ -1,0 +1,22 @@
+<% content_for :head do -%>
+   <%= auto_discovery_link_tag %>
+<% end -%>
+<table class="microposts" summary="User micropost">
+  <%= render :partial => 'shared/micropost', :object => @micropost %>
+</table>
+<h2>Reply now!</h2>
+<%= render 'shared/micropost_reply_form' %>
+
+<% unless @microposts.empty? %>
+  <% form_tag comment_path, :method => 'get' do -%>
+    <p>
+      <% ['created_at', 'vote_score', 'replies'].each do |sort| %>
+        <%= radio_button_tag 'sort', sort, @sort == sort %>
+        <%= sort.humanize %>
+      <% end -%>
+      <%= submit_tag 'Sort' %>
+    </p>
+  <% end -%>
+<% end -%>
+<%= render :partial => 'shared/microposts', :object => @microposts %>
+

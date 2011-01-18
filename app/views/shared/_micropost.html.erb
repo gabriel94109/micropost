@@ -1,0 +1,43 @@
+<tr>
+  <td class="votecell">
+    <div class="vote">
+      <% if signed_in? -%>
+        <% voted = current_user.voted_as_when_voting_for micropost -%>
+        <% if voted -%>
+          <%= link_to 'up vote', '#', :class => 'vote-up-on', :title => 'You have already upvoted this micropost' %>
+          <span class="vote-count-post"><%= micropost.vote_score %></span>
+          <%= link_to 'down vote', vote_comment_path(micropost, :vote => 'downvote'), :class => 'vote-down-off', :title => 'Down vote this micropost' %>
+        <% elsif voted == false -%>
+          <%= link_to 'up vote', vote_comment_path(micropost, :vote => 'upvote'), :class => 'vote-up-off', :title => 'Up vote this micropost' %>
+          <span class="vote-count-post"><%= micropost.vote_score %></span>
+          <%= link_to 'down vote', '#', :class => 'vote-down-on', :title => 'You have already downvoted this micropost' %>
+        <% else -%>
+          <%= link_to 'up vote', vote_comment_path(micropost, :vote => 'upvote'), :class => 'vote-up-off', :title => 'Up vote this micropost' %>
+          <span class="vote-count-post"><%= micropost.vote_score %></span>
+          <%= link_to 'down vote', vote_comment_path(micropost, :vote => 'downvote'), :class => 'vote-down-off', :title => 'Down vote this micropost' %>
+        <% end -%>
+      <% else -%>
+          <%= link_to 'up vote', vote_comment_path(micropost, :vote => 'upvote'), :class => 'vote-up-off', :title => 'Up vote this micropost' %>
+          <span class="vote-count-post"><%= micropost.vote_score %></span>
+          <%= link_to 'down vote', vote_comment_path(micropost, :vote => 'downvote'), :class => 'vote-down-off', :title => 'Down vote this micropost' %>
+      <% end -%>
+    </div>
+  </td>
+  <td class='avatar'>
+    <%= link_to image_tag(micropost.user.image, :alt => "Profile Pic", :class => 'avatar'), "/#{micropost.user.name}" %>
+  </td>
+  <td class='micropost'>
+    <span class='user'>
+      <%= link_to micropost.user.name, "/#{micropost.user.name}" %>
+    </span>
+    <span class='content'>
+      <%= auto_link_hashtag(micropost.body) %>
+    </span><br />
+    <span class='timestamp'>
+      <% taiw = time_ago_in_words(micropost.created_at) -%>
+      <%= link_to "Posted #{taiw} ago", micropost %>
+    </span>
+    <%= micropost.replies %> replies
+  </td>
+</tr>
+
