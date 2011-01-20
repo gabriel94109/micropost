@@ -1,1 +1,9 @@
-read microblogs here
+<% content_for :head do -%>
+   <%= auto_discovery_link_tag %>
+ <% end -%>
+
+ <%= will_paginate @microblogs %>
+ <table class="microposts" summary="User microposts">
+   <%= render(:partial => 'microblog', :collection => @microblogs) %>
+ </table>
+ <%= will_paginate @microblogs %>

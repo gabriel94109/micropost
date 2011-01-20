@@ -10,20 +10,17 @@
         </p>
       <% end -%>
 
-      <%= will_paginate %>
       <%= render 'shared/users' %>
-      <%= will_paginate %>
     </td>
 
     <td class="centerbar round">
 
     </td>
+
     <td class="sidebar round">
-      <p><%= link_to 'Invite Your Friends', '/about' , :class => 'signup_button round' %></p>
+      <p><%= link_to 'Invite Your Friends', '/about' , :class => 'big_button round' %></p>
       <h3>Most Active Users</h3>
-      <%= will_paginate %>
-      <%= render :partial => 'shared/users', :collection => @active_users %>
-      <%= will_paginate %>
+      <%= render 'shared/users', :collection => @active_users %>
     </td>
   </tr>
 </table>

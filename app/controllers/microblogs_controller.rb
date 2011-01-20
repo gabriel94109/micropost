@@ -1,11 +1,11 @@
 class MicroblogsController < ApplicationController
-  before_filter :authenticate, :except => [:show, :index]
+  before_filter :authenticate, :except => [:show, :index, :read]
   before_filter :correct_user, :only => [:edit, :update]
   
   def index
     @sort = sort_by
     @microposts = Comment.where(:commentable_type =>'Microblog').search(params[:search]).order(@sort + ' DESC').paginate(:page => params[:page], :per_page => 10)
-    @users = User.order('microblogs_count DESC').limit(5).paginate(:page => params[:page], :per_page => 5)
+    @users = User.order('microblogs_count DESC').paginate(:page => params[:page], :per_page => 10)
     @hashtags = Microblog.tag_counts_on(:hashtags, :limit => 10, :order => 'count desc')
 
     add_crumb 'Microblogs', microblogs_path
@@ -23,14 +23,20 @@ class MicroblogsController < ApplicationController
   end
   
   def read
-  #supposed to be more like traditional blog
-    set_meta_tags :title => 'Microblog Index Page',
+    # need to fix width, then pagination screwups
+
+    @microblogs = Microblog.order('created_at desc').paginate(:page => params[:page], :per_page => 4)
+
+    set_meta_tags :title => 'Microblog Read Page',
       :description => 'Micropost micro-blogging twitter client web-app',
       :keywords => 'Micropost micro-blogging twitter client web-app' 
 
     respond_to do |format|
       format.html
-      format.rss {render :layout => false }
+      format.rss {
+        @microblogs = Microblog.order('created_at DESC').limit(5)
+        render :layout => false 
+      }
     end
   end
 
@@ -38,7 +44,7 @@ class MicroblogsController < ApplicationController
     @sort = sort_by
     @microblog = Microblog.find(params[:id])
     #root_comments returns a relation, how to just get first element
-    @microposts = @microblog.root_comments.paginate(:page => params[:page], :per_page => 10)
+    @microposts = @microblog.root_comments.paginate(:page => params[:page], :per_page => 1)
 
     add_crumb 'Microblogs', microblogs_path
     add_crumb @microblog.title

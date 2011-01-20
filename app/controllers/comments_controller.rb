@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_filter :authenticate, :only => [ :create, :destroy ]
+  before_filter :authenticate, :only => [ :create, :destroy, :reply]
 
   def index
     # how do i only get comments which are a certain commentable_type
@@ -20,20 +20,20 @@ class CommentsController < ApplicationController
   end
 
   def reply
-    @micropost = Comment.find(params[:id])
-    @reply = Comment.build_from(@micropost, current_user.id, params[:comment][:body])
-    @reply.save
+      @micropost = Comment.find(params[:id])
+      @reply = Comment.build_from(@micropost, current_user.id, params[:comment][:body])
+      @reply.save
 
-    keywords = @reply.body.split.grep(/^#\w+$/)
-    current_user.tag(@reply, :with => keywords, :on => :hashtags)
+      keywords = @reply.body.split.grep(/^#\w+$/)
+      current_user.tag(@reply, :with => keywords, :on => :hashtags)
 
-    @micropost.replies = @micropost.root_comments.count
-    @micropost.save
+      @micropost.replies = @micropost.root_comments.count
+      @micropost.save
 
-    current_user.microposts_count += 1
-    current_user.save
+      current_user.microposts_count += 1
+      current_user.save
 
-    redirect_to comment_path
+      redirect_to comment_path
   end
 
   def create
@@ -66,13 +66,9 @@ class CommentsController < ApplicationController
       m = parent
     end
     m_array.reverse.each do |m|
-#      if m.commentable_type == 'Comment'
-        add_crumb m.body[0..49], m.to_param
-#      else
-#        add_crumb m.title[0..49], m.to_param
-#      end
+        add_crumb m.body[0..39] + '...', m.to_param
     end 
-    add_crumb @micropost.body[0..49]
+    add_crumb @micropost.body[0..39] + '...'
     
     set_meta_tags :title => @micropost.body,
       :description => @micropost.body,

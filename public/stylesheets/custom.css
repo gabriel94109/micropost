@@ -76,7 +76,7 @@ nav ul li a:hover {
 
 /* Buttons */
 
-a.signup_button, a.rss_button{
+a.big_button, a.rss_button{
   margin-left: auto;
   margin-right: auto;
   display: block;
@@ -129,25 +129,24 @@ table.profile {
 td.main {
   width: 70%;
   padding: 1em;
+  vertical-align: top;
 }
 
 td.sidebar, td.leftbar, td.centerbar {
   width: 30%;
   padding: 1em;
   vertical-align: top;
-  background: #ffc;
 }
 
 td.sidebar h3{
   text-align: center;
+  background: #ffc;
 }
 
 td.leftbar {
-  background: #fff;
 }
 
 td.centerbar {
-  background: #fff;
 }
 
 img.avatar {

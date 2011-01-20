@@ -1,0 +1,7 @@
+<h2><%= microblog.title %></h2> 
+
+<%= raw microblog.content %>
+
+<h3>Vote now!</h3>
+<% @microposts = microblog.root_comments.paginate(:page => params[:page], :per_page => 1) -%>
+<%= render 'shared/microposts' %>

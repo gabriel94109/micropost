@@ -1,5 +1,9 @@
-<%= will_paginate @microposts %>
-<table class="microposts" summary="User microposts">
-  <%= render(:partial => 'shared/micropost', :collection => @microposts) %>
-</table>
-<%= will_paginate @microposts %>
+<% if @microposts.empty? -%>
+  <h4>No search results, try another search :)</h4>
+<% else -%>
+  <%= will_paginate @microposts %>
+  <table class="microposts" summary="User microposts">
+    <%= render(:partial => 'shared/micropost', :collection => @microposts) %>
+  </table>
+  <%= will_paginate @microposts %>
+<% end -%>
